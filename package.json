@@ -1,0 +1,31 @@
+{
+  "name": "aps-agi-demo",
+  "version": "1.0.0",
+  "description": "APS x 1Password - agent identity demo. Custody (1Password) + authority (APS narrowing) on the published open SDK. Free, credential-free, runs locally.",
+  "type": "module",
+  "scripts": {
+    "demo": "concurrently -k -n gateway,web -c blue,green \"node --env-file-if-exists=.env gateway/server.mjs\" \"npm --prefix web run dev\"",
+    "gateway": "node --env-file-if-exists=.env gateway/server.mjs",
+    "web": "npm --prefix web run dev",
+    "scripted": "node agents/scenario.mjs",
+    "spine": "node spine.mjs",
+    "postinstall": "npm --prefix web install || true"
+  },
+  "keywords": [
+    "aps",
+    "1password",
+    "agent",
+    "delegation",
+    "identity"
+  ],
+  "license": "Apache-2.0",
+  "dependencies": {
+    "agent-passport-system": "^2.9.0",
+    "concurrently": "^9.1.2",
+    "express": "^4.21.2"
+  },
+  "optionalDependencies": {
+    "@1password/sdk": "*",
+    "stripe": "*"
+  }
+}
